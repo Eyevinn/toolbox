@@ -49,6 +49,7 @@ RUN cd /root/source/ffmpeg && \
   make && make install && \
   ldconfig
 RUN apt-get install -y --force-yes libx265-dev libnuma-dev
+RUN apt-get install -y --force-yes libfreetype6-dev
 RUN cd /root/source/ffmpeg && \
   wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
   tar xjvf ffmpeg-snapshot.tar.bz2 && \
@@ -63,6 +64,7 @@ RUN cd /root/source/ffmpeg && \
     --enable-libvpx \
     --enable-libsrt \
     --enable-libx265 \
+    --enable-libfreetype \
     --enable-version3 \
     --enable-nonfree && \
   make && \

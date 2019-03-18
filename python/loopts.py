@@ -14,6 +14,8 @@ parser.add_argument('inputfile')
 parser.add_argument('multicast')
 parser.add_argument('--workdir', help='specify a working directory, default is /mnt')
 parser.add_argument('--framerate', help='output framerate (DEFAULT 25fps)')
+parser.add_argument('--withtc', action='store_true', help='burn in local timecode in video output')
+parser.add_argument('--with-debug', dest='debug', action='store_true')
 args = parser.parse_args()
 
 workdir = '/mnt'
@@ -24,9 +26,20 @@ framerate = '25'
 if args.framerate:
   framerate = args.framerate
 
-# ffmpeg -stream_loop -1 -i IN.mp4 -map 0:v -vcodec copy -bsf:v h264_mp4toannexb -f h264 - | ffmpeg -fflags +genpts -r 23.98 -re -i - -an -vcodec libx264 -preset veryfast -pix_fmt yuv420p -strict -2 -y -f mpegts 'udp://239.0.0.1:1234'
+tcstr = ''
+if args.withtc:
+  tcstr = ',drawtext=fontfile=/root/Vera.ttf:fontsize=200:text=\'%{localtime\\:%T}\':fontcolor=white@0.9:x=170:y=250:shadowcolor=black:shadowx=2:shadowy=1'
+
+branding = '-vf drawtext=fontfile=/root/Vera.ttf:fontsize=12:text=\'eyevinntechnology/toolbox-loopts\':fontcolor=white@0.9:x=20:y=20:shadowcolor=black:shadowx=2:shadowy=1'
+
+# ffmpeg -stream_loop -1 -i IN.mp4 -map 0:v -vcodec copy -bsf:v h264_mp4toannexb -f h264 - | ffmpeg -fflags +genpts -r 23.98 -re -i - -f lavfi -i anullsrc=r=48000:cl=stereo -c:a aac -shortest -vcodec libx264 -preset veryfast -pix_fmt yuv420p -strict -2 -y -f mpegts 'udp://239.0.0.1:1234'
 ffmpeg1 = "ffmpeg -stream_loop -1 -i %s/%s -map 0:v -vcodec copy -bsf:v h264_mp4toannexb -f h264 -" % (workdir, args.inputfile)
-ffmpeg2 = "ffmpeg -fflags +genpts -r %s -re -i - -an -vcodec libx264 -preset veryfast -pix_fmt yuv420p -strict -2 -y -f mpegts %s" % (framerate, args.multicast)
+ffmpeg2 = "ffmpeg -fflags +genpts -r %s -re -i - -f lavfi -i anullsrc=r=48000:cl=stereo -c:a aac -shortest %s%s -vcodec libx264 -preset veryfast -pix_fmt yuv420p -strict -2 -y -f mpegts -r %s %s" % (framerate, branding, tcstr, framerate, args.multicast)
+
+if args.debug:
+  print "%s | %s" % (ffmpeg1, ffmpeg2)
+  print ffmpeg1.split()
+  print ffmpeg2.split()
 
 p1 = subprocess.Popen(ffmpeg1.split(), stdout=subprocess.PIPE)
 p2 = subprocess.Popen(ffmpeg2.split(), stdin=p1.stdout)
