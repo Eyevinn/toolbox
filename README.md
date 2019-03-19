@@ -49,3 +49,33 @@ docker run --rm -p 9998:9998/udp -v $PWD:/mnt eyevinntechnology/toolbox-loopts I
 ```
 
 Then open VLC with the following network address: `srt://@127.0.0.1:9998`
+
+## Receive MPEG-TS over SRT and restream over multicast
+
+Use the `srtrx` tool to receive an MPEG-TS stream over SRT (Secure Reliable Transport) and restream over multicast. This can be used in the following scenario:
+
+```
++-----------+                     +-----------------+                       +------------+
+|           |                     |                 |                       |            |
+|  SRT Tx   | ===> INTERNET ===>  |  toolbox-srtrx  | ====> MULTICAST ====> | TRANSCODER |
+|           |                     |                 |                       |            |
++-----------+                     +-----------------+                       +------------+
+```
+
+Assuming that the `SRT Tx` is running in listener mode and can be reached on 10.0.110.178:9998 you start the restreamer with the following commmand:
+
+```
+$ docker run --rm -p 1234:1234/udp eyevinntechnology/toolbox-srtrx 10.0.110.178:9998 239.0.0.1:1234
+```
+
+This setup can be emulated by running loopts tool as the `SRT Tx` and VLC as the transcoder.
+
+```
+$ docker run --rm -p 9998:9998/udp -v $PWD:/mnt eyevinntechnology/toolbox-loopts IN.mp4 "srt://0.0.0.0:9998?pkt_size=1316&mode=listener" --withtc
+```
+
+```
+$ docker run --rm -p 9999:9999/udp eyevinntechnology/toolbox-srtrx 10.0.110.178:9998 host.docker.internal:9999
+```
+
+where 10.0.110.178 is the IP of your computer running the loopts container.
