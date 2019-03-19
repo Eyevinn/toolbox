@@ -38,4 +38,14 @@ To test this locally on your computer (Mac + VLC) assuming the file to loop is c
 $ docker run --rm -p 9998:9998/udp -v $PWD:/mnt eyevinntechnology/toolbox-loopts IN.mp4 udp://host.docker.internal:9998?pkt_size=1316 --withtc
 ```
 
-Then open VLC with the following network address: `udp://127.0.0.1:9998`
+Then open VLC with the following network address: `udp://@127.0.0.1:9998`
+
+### Output MPEG-TS over SRT
+
+To use SRT (Secure Reliable Transport) instead of multicast you can run `loopts` as an SRT listener.
+
+```
+docker run --rm -p 9998:9998/udp -v $PWD:/mnt eyevinntechnology/toolbox-loopts IN.mp4 "srt://0.0.0.0:9998?pkt_size=1316&mode=listener" --withtc
+```
+
+Then open VLC with the following network address: `srt://@127.0.0.1:9998`
