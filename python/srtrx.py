@@ -16,7 +16,11 @@ parser.add_argument('--listener', action='store_true', help='run as SRT listener
 parser.add_argument('--with-debug', dest='debug', action='store_true')
 args = parser.parse_args()
 
-ffmpeg = "ffmpeg -re -i srt://%s -vcodec copy -acodec copy -strict -2 -y -f mpegts udp://%s?pkt_size=1316" % (args.inputaddress, args.outputaddress)
+listenermode = ''
+if args.listener:
+  listenermode = '&mode=listener'
+
+ffmpeg = "ffmpeg -re -i srt://%s?pkt_size=1316%s -vcodec copy -acodec copy -strict -2 -y -f mpegts udp://%s?pkt_size=1316" % (args.inputaddress, listenermode, args.outputaddress)
 
 if args.debug:
   print "%s" % ffmpeg

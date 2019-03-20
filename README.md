@@ -79,3 +79,29 @@ $ docker run --rm -p 9999:9999/udp eyevinntechnology/toolbox-srtrx 10.0.110.178:
 ```
 
 where 10.0.110.178 is the IP of your computer running the loopts container.
+
+## Receive RTMP and restream over SRT
+
+The `srttx` tool can be used to receive a local RTMP stream and restream to an `SRT Rx` over the Internet.
+
+```
++------------------+                     +-----------------+                       +------------+
+|  Wirecast &      |                     |                 |                       |            |
+|  toolbox-srttx   | ===> INTERNET ===>  |  toolbox-srtrx  | ====> MULTICAST ====> | TRANSCODER |
+|  10.0.1.20       |                     |  172.10.2.31    |                       |            |
++------------------+                     +-----------------+                       +------------+
+```
+
+On the transmitter side with for example Wirecast as producing the stream assuming IP you first start the `srttx` tool.
+
+```
+$ docker run --rm -p 1935:1935 eyevinntechnology/toolbox-srttx input_stream 172.10.2.31:9998
+```
+
+Then point the Wirecast output to `rtmp://localhost/live/input_stream`
+
+On the receiver side you then run the following:
+
+```
+$ docker run --rm -p 9998:9998/udp -p 9999:9999/udp eyevinntechnology/toolbox-srtrx --listener 0.0.0.0:9998 239.0.0.1:9999`
+```
