@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(description='Receive RTMP and stream over SRT')
 parser.add_argument('inputstream')
 parser.add_argument('outputaddress')
 parser.add_argument('--listener', action='store_true', help='run as SRT listener')
+parser.add_argument('--passthrough', action='store_true', help='passthrough input and skip encoding process')
 parser.add_argument('--with-debug', dest='debug', action='store_true')
 args = parser.parse_args()
 
@@ -20,7 +21,11 @@ listenermode = ''
 if args.listener:
   listenermode = '&mode=listener'
 
-ffmpeg = "ffmpeg -fflags +genpts -listen 1 -re -i rtmp://0.0.0.0/live/%s -acodec copy -vcodec libx264 -preset veryfast -pix_fmt yuv420p -strict -2 -y -f mpegts srt://%s?pkt_size=1316%s" % (args.inputstream, args.outputaddress, listenermode)
+outputcoding = '-acodec copy -vcodec libx264 -preset veryfast -pix_fmt yuv420p'
+if args.passthrough:
+  outputcoding = '-acodec copy -vcodec copy'
+
+ffmpeg = "ffmpeg -fflags +genpts -listen 1 -re -i rtmp://0.0.0.0/live/%s %s -strict -2 -y -f mpegts srt://%s?pkt_size=1316%s" % (args.inputstream, outputcoding, args.outputaddress, listenermode)
 
 if args.debug:
   print "%s" % ffmpeg
