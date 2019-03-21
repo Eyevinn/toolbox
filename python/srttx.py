@@ -1,7 +1,11 @@
 #!/usr/bin/python2.7
 #
+# Copyright 2019 Eyevinn Technology. All rights reserved
+# Use of this source code is governed by a MIT License
+# that can be found in the LICENSE file.
+# Author: Jonas Rydholm Birmé (Eyevinn Technology)
+#
 # Receive RTMP and stream over SRT
-# Copyright 2019 Eyevinn Technology
 #
 import argparse
 import subprocess
