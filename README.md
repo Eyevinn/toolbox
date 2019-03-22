@@ -146,6 +146,14 @@ optional arguments:
   --passthrough  passthrough input and skip encoding process
 ```
 
+### MPEG-TS as a source
+
+The `srttx` tool can also take an MPEG-TS as a source. Instead run the following command on the transmitter side. The receiver side as before.
+
+```
+$ docker run --rm eyevinntechnology/toolbox-srttx <MULTICAST>:<MULTICAST-PORT> <IP-RX>:9998 --passthrough --inputtype=mpegts
+```
+
 ## Receive RTMP and restream over Multicast
 
 Use the `rtmprx` tool to receive RTMP and restream MPEG-TS over multicast if you want to use RTMP as the transport protocol with a live transcoder that for example only supports MPEG-TS multicast.
