@@ -7,7 +7,7 @@ The Eyevinn Toolbox is a set of Docker containers with tools that may come in ha
 | Loop TS | Generate MPEG-TS stream over multicast or SRT by looping an MP4 file | eyevinntechnology/loopts |
 | SRT Tx  | Transport stream over SRT | eyevinntechnology/srttx |
 | SRT Rx  | Receive stream over SRT | eyevinntechnology/srtrx |
-| RTMP Rx | Receive RTMP stream over multicast | eyevinntechnology/rtmprx |
+| RTMP Rx | Receive RTMP and stream over multicast | eyevinntechnology/rtmprx |
 
 ## Loop input file and output MPEG-TS multicast
 
