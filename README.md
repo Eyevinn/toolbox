@@ -130,7 +130,7 @@ $ docker run --rm -p 9998:9998/udp -p <MULTICAST-PORT>:<MULTICAST-PORT>/udp eyev
 
 ```
 $ docker run --rm eyevinntechnology/toolbox-srttx -h
-usage: srttx.py [-h] [--listener] [--passthrough] [--with-debug]
+usage: srttx.py [-h] [--inputtype INPUTTYPE] [--listener] [--passthrough]
                 inputstream outputaddress
 
 Receive RTMP and stream over SRT
@@ -141,6 +141,7 @@ positional arguments:
 
 optional arguments:
   -h, --help     show this help message and exit
+  --inputtype INPUTTYPE type of input [rtmp|mpegts], default is rtmp  
   --listener     run as SRT listener
   --passthrough  passthrough input and skip encoding process
 ```
