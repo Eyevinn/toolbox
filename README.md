@@ -7,6 +7,7 @@ The Eyevinn Toolbox is a set of Docker containers with tools that may come in ha
 | Loop TS | Generate MPEG-TS stream over multicast or SRT by looping an MP4 file | eyevinntechnology/loopts |
 | SRT Tx  | Transport stream over SRT | eyevinntechnology/srttx |
 | SRT Rx  | Receive stream over SRT | eyevinntechnology/srtrx |
+| RTMP Rx | Receive RTMP stream over multicast | eyevinntechnology/rtmprx |
 
 ## Loop input file and output MPEG-TS multicast
 
@@ -119,7 +120,7 @@ On the transmitter side with for example Wirecast as producing the stream first 
 $ docker run --rm -p 1935:1935 eyevinntechnology/toolbox-srttx input_stream <IP-RX>:9998 --passthrough
 ```
 
-Then point the Wirecast output to `rtmp://localhost/live/input_stream`
+Then point the Wirecast / OBS output to `rtmp://localhost/live/input_stream`
 
 On the receiver side you then run the following:
 
@@ -144,3 +145,27 @@ optional arguments:
   --passthrough  passthrough input and skip encoding process
 ```
 
+## Receive RTMP and restream over Multicast
+
+Use the `rtmprx` tool to receive RTMP and restream MPEG-TS over multicast if you want to use RTMP as the transport protocol with a live transcoder that for example only supports MPEG-TS multicast.
+
+On the receiver side run the following command:
+
+```
+$ docker run --rm -p 1935:1935 -p <MULTICAST-PORT>:<MULTICAST-PORT>/udp eyevinntechnology/toolbox-rtmprx input_stream <MULTICAST>:<MULTICAST-PORT> --passthrough
+```
+
+```
+$ docker run --rm eyevinntechnology/toolbox-rtmprx -h
+usage: rtmprx.py [-h] [--passthrough] [--with-debug] inputstream outputaddress
+
+Receive RTMP and restream over Multicast
+
+positional arguments:
+  inputstream
+  outputaddress
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --passthrough  passthrough input and skip encoding process
+```
