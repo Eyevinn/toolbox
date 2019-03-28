@@ -8,7 +8,7 @@ The Eyevinn Toolbox is a set of Docker containers with tools that may come in ha
 | SRT Tx    | Transport stream over SRT | eyevinntechnology/srttx |
 | SRT Rx    | Receive stream over SRT | eyevinntechnology/srtrx |
 | RTMP Rx   | Receive RTMP and stream over multicast | eyevinntechnology/rtmprx |
-| Mosaic TS | Render a 2x2 or 3x3 mosaic in MPEG-TS from 4 or 9 HLS sources |
+| Mosaic TS | Render a 2x2 or 3x3 mosaic in MPEG-TS from 4 or 9 HLS sources | eyevinntechnology/mosaicts |
 
 ## Loop input file and output MPEG-TS multicast
 
