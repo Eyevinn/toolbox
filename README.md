@@ -2,12 +2,13 @@
 
 The Eyevinn Toolbox is a set of Docker containers with tools that may come in handy. They are all free to use and if you have any suggestions feel free to create a ticket.
 
-| Tool    | Description | Container |
-| ----    | ----------- | --------- |
-| Loop TS | Generate MPEG-TS stream over multicast or SRT by looping an MP4 file | eyevinntechnology/loopts |
-| SRT Tx  | Transport stream over SRT | eyevinntechnology/srttx |
-| SRT Rx  | Receive stream over SRT | eyevinntechnology/srtrx |
-| RTMP Rx | Receive RTMP and stream over multicast | eyevinntechnology/rtmprx |
+| Tool      | Description | Container |
+| ----      | ----------- | --------- |
+| Loop TS   | Generate MPEG-TS stream over multicast or SRT by looping an MP4 file | eyevinntechnology/loopts |
+| SRT Tx    | Transport stream over SRT | eyevinntechnology/srttx |
+| SRT Rx    | Receive stream over SRT | eyevinntechnology/srtrx |
+| RTMP Rx   | Receive RTMP and stream over multicast | eyevinntechnology/rtmprx |
+| Mosaic TS | Render a 2x2 or 3x3 mosaic in MPEG-TS from 4 or 9 HLS sources |
 
 ## Loop input file and output MPEG-TS multicast
 
@@ -177,4 +178,33 @@ positional arguments:
 optional arguments:
   -h, --help     show this help message and exit
   --passthrough  passthrough input and skip encoding process
+```
+
+## Render a Mosaic from HLS sources
+
+Use the `mosaicts` tool to render a 2x2 or 3x3 mosaic of HLS sources.
+
+```
+$ docker run --rm eyevinntechnology/toolbox-mosaicts -h
+usage: mosaicts.py [-h] [--port PORT] [--multicast MULTICAST] [--with-debug]
+                   layout urlfile
+
+Take multiple HLS sources and render a mosaic in MPEG-TS
+
+positional arguments:
+  layout                2x2|3x3
+  urlfile               A text file containing URLs to HLS sources. One source
+                        per line.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --port PORT
+  --multicast MULTICAST
+                        Use multicast address specified here instead of SRT
+```
+
+To read the list of URLs from STDIN:
+
+```
+$ docker run --rm -i -p 9998:9998/udp eyevinntechnology/toolbox-mosaicts 2x2 - < urls.txt
 ```
