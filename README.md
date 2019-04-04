@@ -38,6 +38,7 @@ optional arguments:
   --framerate FRAMERATE  output framerate (DEFAULT 25fps)
   --withtc               burn in local timecode in video
   --withaudio            adds a test tone on the audio track
+  --useflv               use FLV for RTMP output
 ```
 
 To test this locally on your computer (Mac + VLC) assuming the file to loop is called IN.mp4 and in your working directory
@@ -57,6 +58,14 @@ docker run --rm -p 9998:9998/udp -v $PWD:/mnt eyevinntechnology/toolbox-loopts I
 ```
 
 Then open VLC with the following network address: `srt://@127.0.0.1:9998`
+
+### Output FLV over RTMP
+
+To use RTMP instead of multicast you can run `loopts` and push with RTMP
+
+```
+docker run --rm -it -v $PWD:/mnt eyevinntechnology/toolbox-loopts --useflv IN.mp4 "rtmp://live.twitch.tv/app/live_*****"
+```
 
 ## Receive MPEG-TS over SRT and restream over multicast
 
