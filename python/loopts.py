@@ -18,7 +18,7 @@ parser.add_argument('inputfile')
 parser.add_argument('multicast')
 parser.add_argument('--workdir', help='specify a working directory, default is /mnt')
 parser.add_argument('--framerate', help='output framerate (DEFAULT 25fps)')
-parser.add_argument('--kfinterval', help='specify keyframe interval (DEFAULT 1 sec)')
+parser.add_argument('--kfinterval', help='specify keyframe interval (DEFAULT 2 sec)')
 parser.add_argument('--hevc', action='store_true', help='use HEVC encoded output')
 parser.add_argument('--withtc', action='store_true', help='burn in local timecode in video output')
 parser.add_argument('--withaudio', action='store_true', help='adds a test tone on the audio track')
@@ -51,7 +51,7 @@ if args.withaudio:
 
 audiocopy = '-map 0:v -vcodec copy'
 
-kfinterval = float(framerate) * 1
+kfinterval = float(framerate) * 2
 
 if args.kfinterval:
   kfinterval = float(framerate) * float(args.kfinterval)
