@@ -50,9 +50,9 @@ if args.withaudio:
 
 audiocopy = '-map 0:v -vcodec copy'
 
-outputencoding = '-vcodec libx264 -preset veryfast -pix_fmt yuv420p'
+outputencoding = '-vcodec libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s' % (framerate, framerate)
 if args.hevc:
-  outputencoding = '-vcodec libx265 -preset superfast -pix_fmt yuv420p'
+  outputencoding = '-vcodec libx265 -preset superfast -pix_fmt yuv420p -g %s -keyint_min %s' % (framerate, framerate)
 
 outputformat = 'mpegts'
 if args.useflv:
