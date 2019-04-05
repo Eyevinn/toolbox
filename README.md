@@ -33,12 +33,13 @@ positional arguments:
   multicast
 
 optional arguments:
-  -h, --help             show this help message and exit
-  --workdir WORKDIR      specify a working directory, default is /mnt
-  --framerate FRAMERATE  output framerate (DEFAULT 25fps)
-  --withtc               burn in local timecode in video
-  --withaudio            adds a test tone on the audio track
-  --useflv               use FLV for RTMP output
+  -h, --help              show this help message and exit
+  --workdir WORKDIR       specify a working directory, default is /mnt
+  --framerate FRAMERATE   output framerate (DEFAULT 25fps)
+  --kfinterval KFINTERVAL specify keyframe interval (DEFAULT 1 sec)  
+  --withtc                burn in local timecode in video
+  --withaudio             adds a test tone on the audio track
+  --useflv                use FLV for RTMP output
 ```
 
 To test this locally on your computer (Mac + VLC) assuming the file to loop is called IN.mp4 and in your working directory
