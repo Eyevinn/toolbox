@@ -136,7 +136,7 @@ Then point the Wirecast / OBS output to `rtmp://localhost/live/input_stream`
 On the receiver side you then run the following:
 
 ```
-$ docker run --rm -p 9998:9998/udp -p <MULTICAST-PORT>:<MULTICAST-PORT>/udp eyevinntechnology/toolbox-srtrx --listener 0.0.0.0:9998 <MULTICAST>:<MULTICAST-PORT>`
+$ docker run --rm -p 9998:9998/udp -p <MULTICAST-PORT>:<MULTICAST-PORT>/udp eyevinntechnology/toolbox-srtrx --listener --passthrough 0.0.0.0:9998 <MULTICAST>:<MULTICAST-PORT>`
 ```
 
 ```
