@@ -19,6 +19,7 @@ parser.add_argument('multicast')
 parser.add_argument('--workdir', help='specify a working directory, default is /mnt')
 parser.add_argument('--framerate', help='output framerate (DEFAULT 25fps)')
 parser.add_argument('--kfinterval', help='specify keyframe interval (DEFAULT 2 sec)')
+parser.add_argument('--bitrate', help='specify video bitrate in kbps (e.g. 2500)')
 parser.add_argument('--hevc', action='store_true', help='use HEVC encoded output')
 parser.add_argument('--withtc', action='store_true', help='burn in local timecode in video output')
 parser.add_argument('--withaudio', action='store_true', help='adds a test tone on the audio track')
@@ -56,9 +57,13 @@ kfinterval = float(framerate) * 2
 if args.kfinterval:
   kfinterval = float(framerate) * float(args.kfinterval)
 
-outputencoding = '-vcodec libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s' % (kfinterval, kfinterval)
+bitratestr = ''
+if args.bitrate:
+  bitratestr = '-b:v %sk -minrate %sk -maxrate %sk -bufsize %sk' % (args.bitrate, args.bitrate, args.bitrate, float(args.bitrate) / float(framerate))
+
+outputencoding = '-vcodec libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s %s' % (kfinterval, kfinterval, bitratestr)
 if args.hevc:
-  outputencoding = '-vcodec libx265 -preset superfast -pix_fmt yuv420p -g %s -keyint_min %s' % (kfinterval, kfinterval)
+  outputencoding = '-vcodec libx265 -preset superfast -pix_fmt yuv420p -g %s -keyint_min %s %s' % (kfinterval, kfinterval, bitratestr)
 
 outputformat = 'mpegts'
 if args.useflv:

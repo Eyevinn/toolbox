@@ -36,7 +36,8 @@ optional arguments:
   -h, --help              show this help message and exit
   --workdir WORKDIR       specify a working directory, default is /mnt
   --framerate FRAMERATE   output framerate (DEFAULT 25fps)
-  --kfinterval KFINTERVAL specify keyframe interval (DEFAULT 2 sec)  
+  --kfinterval KFINTERVAL specify keyframe interval (DEFAULT 2 sec)
+  --bitrate BITRATE       specify video bitrate in kbps (e.g. 2500)  
   --withtc                burn in local timecode in video
   --withaudio             adds a test tone on the audio track
   --useflv                use FLV for RTMP output
