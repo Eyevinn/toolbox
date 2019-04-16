@@ -112,6 +112,7 @@ positional arguments:
 optional arguments:
   -h, --help     show this help message and exit
   --listener     run as SRT listener
+  --passthrough  for low latency skip the unmux and mux step.
 ```
 
 ## Receive RTMP and restream over SRT
