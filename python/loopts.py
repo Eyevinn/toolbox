@@ -49,7 +49,7 @@ if args.nologo:
 
 audiostr = '-f lavfi -i anullsrc=r=48000:cl=stereo'
 if args.withaudio:
-  audiostr = '-f lavfi sine=frequency=1000:sample_rate=48000'
+  audiostr = '-f lavfi -i sine=frequency=1000:sample_rate=48000'
 
 audiocopy = '-map 0:v -vcodec copy'
 
