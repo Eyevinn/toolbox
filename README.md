@@ -22,8 +22,10 @@ The following options are available:
 
 ```
 $ docker run --rm -v $PWD:/mnt eyevinntechnology/toolbox-loopts -h
-usage: loopts.py [-h] [--workdir WORKDIR] [--framerate FRAMERATE] [--withtc]
-                 [--withaudio]
+usage: loopts.py [-h] [--workdir WORKDIR] [--framerate FRAMERATE]
+                 [--kfinterval KFINTERVAL] [--bitrate BITRATE] [--hevc]
+                 [--withtc] [--withaudio] [--nologo] [--useflv]
+                 [--multibitrate]
                  inputfile multicast
 
 Loop an MP4 file and output to MPEG-TS multicast
@@ -37,10 +39,13 @@ optional arguments:
   --workdir WORKDIR       specify a working directory, default is /mnt
   --framerate FRAMERATE   output framerate (DEFAULT 25fps)
   --kfinterval KFINTERVAL specify keyframe interval (DEFAULT 2 sec)
-  --bitrate BITRATE       specify video bitrate in kbps (e.g. 2500)  
-  --withtc                burn in local timecode in video
+  --bitrate BITRATE       specify video bitrate in kbps (e.g. 2500)
+  --hevc                  use HEVC encoded output
+  --withtc                burn in local timecode in video output
   --withaudio             adds a test tone on the audio track
+  --nologo                remove logo
   --useflv                use FLV for RTMP output
+  --multibitrate          output multiple video bitrates
 ```
 
 To test this locally on your computer (Mac + VLC) assuming the file to loop is called IN.mp4 and in your working directory
