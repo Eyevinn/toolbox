@@ -54,9 +54,11 @@ if args.withaudio:
 audiocopy = '-map 0:v -vcodec copy'
 
 kfinterval = float(framerate) * 2
+forcekf = 2
 
 if args.kfinterval:
   kfinterval = float(framerate) * float(args.kfinterval)
+  forcekf = args.kfinterval
 
 streamidstr = ''
 overlayfilter = '-filter_complex [0:v]%s%s%s[overlay]' % (branding, tcstr, framestr)
@@ -78,10 +80,10 @@ if args.multibitrate:
   scalefilter += '[o3]scale=1280:720,drawtext=fontfile=/root/Vera.ttf:fontsize=12:text=\'1280x720\':fontcolor=white@0.9:x=(w-tw)/2:y=20:shadowcolor=black:shadowx=2:shadowy=1[out720];'
   scalefilter += '[o4]scale=1920:1080,drawtext=fontfile=/root/Vera.ttf:fontsize=12:text=\'1920x1080\':fontcolor=white@0.9:x=(w-tw)/2:y=20:shadowcolor=black:shadowx=2:shadowy=1[out1080]'
   mapstr = '%s;%s -map [out360] -map 1:0 -map [out480] -map [out720] -map [out1080]' % (overlayfilter, scalefilter)
-  outputencoding = '-c:v:0 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -b:v:0 400k -maxrate 400k -bufsize %sk' % (kfinterval, kfinterval, 400 / float(framerate))
-  outputencoding += ' -c:v:1 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -b:v:1 1000k -maxrate 1000k -bufsize %sk' % (kfinterval, kfinterval, 1000 / float(framerate))
-  outputencoding += ' -c:v:2 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -b:v:2 2000k -maxrate 2000k -bufsize %sk' % (kfinterval, kfinterval, 2000 / float(framerate))
-  outputencoding += ' -c:v:3 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -b:v:3 4500k -maxrate 4500k -bufsize %sk' % (kfinterval, kfinterval, 4500 / float(framerate))
+  outputencoding = '-c:v:0 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -force_key_frames expr:gte(t,n_forced*%s) -b:v:0 400k -maxrate 400k -bufsize %sk' % (kfinterval, kfinterval, forcekf, 400 / float(framerate))
+  outputencoding += ' -c:v:1 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -force_key_frames expr:gte(t,n_forced*%s) -b:v:1 1000k -maxrate 1000k -bufsize %sk' % (kfinterval, kfinterval, forcekf, 1000 / float(framerate))
+  outputencoding += ' -c:v:2 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -force_key_frames expr:gte(t,n_forced*%s) -b:v:2 2000k -maxrate 2000k -bufsize %sk' % (kfinterval, kfinterval, forcekf, 2000 / float(framerate))
+  outputencoding += ' -c:v:3 libx264 -preset veryfast -pix_fmt yuv420p -g %s -keyint_min %s -force_key_frames expr:gte(t,n_forced*%s) -b:v:3 4500k -maxrate 4500k -bufsize %sk' % (kfinterval, kfinterval, forcekf, 4500 / float(framerate))
 
 outputformat = 'mpegts'
 if args.useflv:
