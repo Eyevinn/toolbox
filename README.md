@@ -245,3 +245,9 @@ optional arguments:
   -h, --help     show this help message and exit
   --with-debug
 ```
+
+Example:
+
+```
+docker run --rm eyevinntechnology/toolbox-hls2ts:0.1.0 HLSURL <MULTICAST>:<MULTICAST-PORT>
+```
