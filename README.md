@@ -9,6 +9,7 @@ The Eyevinn Toolbox is a set of Docker containers with tools that may come in ha
 | SRT Rx    | Receive stream over SRT | eyevinntechnology/toolbox-srtrx |
 | RTMP Rx   | Receive RTMP and stream over multicast | eyevinntechnology/toolbox-rtmprx |
 | Mosaic TS | Render a 2x2 or 3x3 mosaic in MPEG-TS from 4 or 9 HLS sources | eyevinntechnology/toolbox-mosaicts |
+| HLS 2 TS  | Pull a live HLS stream and output to multicast TS | eyevinntechnology/toolbox-hls2ts |
 
 ## Loop input file and output MPEG-TS multicast
 
@@ -224,4 +225,23 @@ To read the list of URLs from STDIN:
 
 ```
 $ docker run --rm -i -p 9998:9998/udp eyevinntechnology/toolbox-mosaicts 2x2 - < urls.txt
+```
+
+## Pull a live HLS stream and output to multicast TS
+
+Use the `hls2ts` tool to pull an HLS live stream and output to multicast TS.
+
+```
+$ docker run --rm eyevinntechnology/toolbox-hls2ts -h
+usage: hls2ts.py [-h] [--with-debug] hlsurl outputaddress
+
+Pull live HLS and output to multicast TS
+
+positional arguments:
+  hlsurl
+  outputaddress
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --with-debug
 ```
