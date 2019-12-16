@@ -1,7 +1,7 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 MAINTAINER Eyevinn Technology <info@eyevinn.se>
-RUN apt-get update
-RUN apt-get install -y --force-yes autoconf
+RUN apt-get -y update
+RUN apt-get install -y autoconf
 RUN apt-get install -y --force-yes automake
 RUN apt-get install -y --force-yes build-essential
 RUN apt-get install -y --force-yes pkg-config
@@ -50,6 +50,9 @@ RUN cd /root/source/ffmpeg && \
   ldconfig
 RUN apt-get install -y --force-yes libx265-dev libnuma-dev
 RUN apt-get install -y --force-yes libfreetype6-dev
+RUN apt-get install -y --force-yes libopus-dev
+RUN apt-get install -y --force-yes openssl
+RUN apt-get install -y --force-yes libssl-dev
 RUN cd /root/source/ffmpeg && \
   wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
   tar xjvf ffmpeg-snapshot.tar.bz2 && \
@@ -65,7 +68,9 @@ RUN cd /root/source/ffmpeg && \
     --enable-libsrt \
     --enable-libx265 \
     --enable-libfreetype \
+    --enable-libopus \
     --enable-version3 \
+    --enable-openssl \
     --enable-nonfree && \
   make && \
   make install && \
