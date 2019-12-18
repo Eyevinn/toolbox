@@ -16,12 +16,17 @@ import glob
 parser = argparse.ArgumentParser(description='Pull live HLS and output to multicast TS')
 parser.add_argument('hlsurl')
 parser.add_argument('outputaddress')
+parser.add_argument('--srt', action='store_true', help='use SRT as transport protocol')
 parser.add_argument('--with-debug', dest='debug', action='store_true')
 args = parser.parse_args()
 
 outputcoding = '-acodec copy -vcodec copy'
 
-ffmpeg = "ffmpeg -fflags +genpts -re -i %s -strict -2 -y -f mpegts udp://%s?pkt_size=1316" % (args.hlsurl, args.outputaddress)
+protocol = 'udp'
+if args.srt:
+  protocol = 'srt'
+
+ffmpeg = "ffmpeg -fflags +genpts -re -i %s -strict -2 -y -f mpegts %s://%s?pkt_size=1316" % (args.hlsurl, protocol, args.outputaddress)
 
 if args.debug:
   print "%s" % ffmpeg
