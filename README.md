@@ -233,7 +233,8 @@ Use the `hls2ts` tool to pull an HLS live stream and output to multicast TS.
 
 ```
 $ docker run --rm eyevinntechnology/toolbox-hls2ts -h
-usage: hls2ts.py [-h] [--with-debug] hlsurl outputaddress
+usage: hls2ts.py [-h] [--srt] [--bitrate BITRATE] [--with-debug]
+                 hlsurl outputaddress
 
 Pull live HLS and output to multicast TS
 
@@ -242,8 +243,11 @@ positional arguments:
   outputaddress
 
 optional arguments:
-  -h, --help     show this help message and exit
+  -h, --help         show this help message and exit
+  --srt              use SRT as transport protocol
+  --bitrate BITRATE  which bitrate to use
   --with-debug
+
 ```
 
 Example:

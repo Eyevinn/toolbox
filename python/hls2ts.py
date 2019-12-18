@@ -17,16 +17,19 @@ parser = argparse.ArgumentParser(description='Pull live HLS and output to multic
 parser.add_argument('hlsurl')
 parser.add_argument('outputaddress')
 parser.add_argument('--srt', action='store_true', help='use SRT as transport protocol')
+parser.add_argument('--bitrate', help='which bitrate to use')
 parser.add_argument('--with-debug', dest='debug', action='store_true')
 args = parser.parse_args()
-
-outputcoding = '-acodec copy -vcodec copy'
 
 protocol = 'udp'
 if args.srt:
   protocol = 'srt'
 
-ffmpeg = "ffmpeg -fflags +genpts -re -i %s -strict -2 -y -f mpegts %s://%s?pkt_size=1316" % (args.hlsurl, protocol, args.outputaddress)
+bitrate = ''
+if args.bitrate:
+  bitrate = "-map m:variant_bitrate:%s" % args.bitrate
+
+ffmpeg = "ffmpeg -fflags +genpts -re -i %s %s -strict -2 -y -vcodec copy -f mpegts %s://%s?pkt_size=1316" % (args.hlsurl, bitrate, protocol, args.outputaddress)
 
 if args.debug:
   print "%s" % ffmpeg
