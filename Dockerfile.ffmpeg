@@ -53,6 +53,7 @@ RUN apt-get install -y --force-yes libfreetype6-dev
 RUN apt-get install -y --force-yes libopus-dev
 RUN apt-get install -y --force-yes openssl
 RUN apt-get install -y --force-yes libssl-dev
+RUN apt-get install -y --force-yes libmp3lame-dev
 RUN cd /root/source/ffmpeg && \
   wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
   tar xjvf ffmpeg-snapshot.tar.bz2 && \
@@ -69,6 +70,7 @@ RUN cd /root/source/ffmpeg && \
     --enable-libx265 \
     --enable-libfreetype \
     --enable-libopus \
+    --enable-libmp3lame \
     --enable-version3 \
     --enable-openssl \
     --enable-nonfree && \
