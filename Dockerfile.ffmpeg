@@ -31,7 +31,14 @@ RUN mkdir -p /root/source/ffmpeg/libaom && \
   make install
 RUN apt-get install -y --force-yes python3 python3-pip ninja-build
 RUN pip3 install meson
-RUN apt-get install -y --force-yes nasm
+#RUN apt-get install -y --force-yes nasm
+RUN cd /root/source/ffmpeg && \
+  wget https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.bz2 && \
+  tar xjvf nasm-2.14.02.tar.bz2 && \
+  cd nasm-2.14.02 && \
+  ./configure --prefix=/usr && \
+  make && \
+  make install
 RUN cd /root/source/ffmpeg && \
   git clone https://code.videolan.org/videolan/dav1d.git && \
   cd dav1d && \
