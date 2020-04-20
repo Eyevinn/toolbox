@@ -2,13 +2,13 @@ FROM ubuntu:18.04
 MAINTAINER Eyevinn Technology <info@eyevinn.se>
 RUN apt-get -y update
 RUN apt-get install -y autoconf
-RUN apt-get install -y --force-yes automake
-RUN apt-get install -y --force-yes build-essential
-RUN apt-get install -y --force-yes pkg-config
-RUN apt-get install -y --force-yes libtool
-RUN apt-get install -y --force-yes wget
-RUN apt-get install -y --force-yes yasm
-RUN apt-get install -y --force-yes libx264-dev
+RUN apt-get install -y --allow-change-held-packages automake
+RUN apt-get install -y --allow-change-held-packages build-essential
+RUN apt-get install -y --allow-change-held-packages pkg-config
+RUN apt-get install -y --allow-change-held-packages libtool
+RUN apt-get install -y --allow-change-held-packages wget
+RUN apt-get install -y --allow-change-held-packages yasm
+RUN apt-get install -y --allow-change-held-packages libx264-dev
 RUN mkdir /root/source
 RUN mkdir /root/source/ffmpeg
 RUN cd /root/source/ffmpeg && \
@@ -20,18 +20,18 @@ RUN cd /root/source/ffmpeg && \
   make && \
   make install && \
   make distclean
-RUN apt-get install -y --force-yes git
-RUN apt-get install -y --force-yes cmake
-RUN apt-get install -y --force-yes python2.7
+RUN apt-get install -y --allow-change-held-packages git
+RUN apt-get install -y --allow-change-held-packages cmake
+RUN apt-get install -y --allow-change-held-packages python2.7
 RUN mkdir -p /root/source/ffmpeg/libaom && \
   cd /root/source/ffmpeg/libaom && \
   git clone https://aomedia.googlesource.com/aom && \
   cmake ./aom && \
   make && \
   make install
-RUN apt-get install -y --force-yes python3 python3-pip ninja-build
+RUN apt-get install -y --allow-change-held-packages python3 python3-pip ninja-build
 RUN pip3 install meson
-#RUN apt-get install -y --force-yes nasm
+#RUN apt-get install -y --allow-change-held-packages nasm
 RUN cd /root/source/ffmpeg && \
   wget https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.bz2 && \
   tar xjvf nasm-2.14.02.tar.bz2 && \
@@ -46,21 +46,21 @@ RUN cd /root/source/ffmpeg && \
   ninja -C build && \
   ninja -C build install && \
   ldconfig
-RUN apt-get install -y --force-yes libvpx-dev
-RUN apt-get install -y --force-yes libssl-dev
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes tclsh
+RUN apt-get install -y --allow-change-held-packages libvpx-dev
+RUN apt-get install -y --allow-change-held-packages libssl-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-change-held-packages tclsh
 RUN cd /root/source/ffmpeg && \
   git clone https://github.com/Haivision/srt.git && \
   cd srt && \
   ./configure && \
   make && make install && \
   ldconfig
-RUN apt-get install -y --force-yes libx265-dev libnuma-dev
-RUN apt-get install -y --force-yes libfreetype6-dev
-RUN apt-get install -y --force-yes libopus-dev
-RUN apt-get install -y --force-yes openssl
-RUN apt-get install -y --force-yes libssl-dev
-RUN apt-get install -y --force-yes libmp3lame-dev
+RUN apt-get install -y --allow-change-held-packages libx265-dev libnuma-dev
+RUN apt-get install -y --allow-change-held-packages libfreetype6-dev
+RUN apt-get install -y --allow-change-held-packages libopus-dev
+RUN apt-get install -y --allow-change-held-packages openssl
+RUN apt-get install -y --allow-change-held-packages libssl-dev
+RUN apt-get install -y --allow-change-held-packages libmp3lame-dev
 RUN cd /root/source/ffmpeg && \
   wget http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
   tar xjvf ffmpeg-snapshot.tar.bz2 && \
