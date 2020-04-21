@@ -256,6 +256,26 @@ Example:
 docker run --rm eyevinntechnology/toolbox-hls2ts:0.1.0 HLSURL <MULTICAST>:<MULTICAST-PORT>
 ```
 
+## Re-stream SRT to multiple RTMP destinations
+
+Use the `srt2rtmp` tool to receive an SRT stream and re-stream to multiple RTMP destinations.
+
+Example:
+
+```
+docker run --rm -p 1234:1234/udp eyevinntechnology/toolbox-srt2rtmp:0.1.0 0.0.0.0:1234 <RTMPURL1> <RTMPURL2>
+```
+
+## Pull a live HLS stream and output to multiple RTMP destinations
+
+Use the `hls2rtmp` tool to pull a live HLS stream and re-stream to multiple RTMP destinations.
+
+Example:
+
+```
+docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.1 HLSURL <RTMPURL1> <RTMPURL2>
+```
+
 # About Eyevinn Technology
 
 Eyevinn Technology is an independent consultant firm specialized in video and streaming. Independent in a way that we are not commercially tied to any platform or technology vendor.
