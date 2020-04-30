@@ -263,7 +263,7 @@ Use the `srt2rtmp` tool to receive an SRT stream and re-stream to multiple RTMP 
 Example:
 
 ```
-docker run --rm -p 1234:1234/udp eyevinntechnology/toolbox-srt2rtmp:0.1.0 0.0.0.0:1234 <RTMPURL1> <RTMPURL2>
+docker run --rm -p 1234:1234/udp eyevinntechnology/toolbox-srt2rtmp:0.1.1 0.0.0.0:1234 <RTMPURL1> <RTMPURL2>
 ```
 
 ## Pull a live HLS stream and output to multiple RTMP destinations
@@ -273,7 +273,7 @@ Use the `hls2rtmp` tool to pull a live HLS stream and re-stream to multiple RTMP
 Example:
 
 ```
-docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.1 HLSURL <RTMPURL1> <RTMPURL2>
+docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.2 HLSURL <RTMPURL1> <RTMPURL2>
 ```
 
 # About Eyevinn Technology
