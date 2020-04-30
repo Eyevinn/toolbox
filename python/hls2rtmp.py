@@ -34,10 +34,10 @@ srtoutput = ""
 if args.programreturn:
   srtoutput = "-f mpegts srt://0.0.0.0:%s?pkt_size=1316%s" % (returnport, srtmode)
 
-ffmpeg = "ffmpeg -fflags +genpts -re -i %s -vcodec copy -strict -2 -y %s " % (args.hlsurl, srtoutput)
+ffmpeg = "ffmpeg -fflags +genpts -re -i %s -vcodec copy -acodec copy -strict -2 -y %s " % (args.hlsurl, srtoutput)
 
 for dest in args.output:
-  ffmpeg = ffmpeg + "-f flv -ar 44100 %s " % (dest)
+  ffmpeg = ffmpeg + "-f flv %s " % (dest)
 
 if args.debug:
   print "%s" % ffmpeg
