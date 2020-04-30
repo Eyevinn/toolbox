@@ -276,6 +276,22 @@ Example:
 docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.2 HLSURL <RTMPURL1> <RTMPURL2>
 ```
 
+## Listen for an RTMP stream and output to SRT
+
+Use the `rtmp2srt` tool to receive an RTMP stream and transmit over SRT.
+
+Example:
+
+```
+docker run --rm -p 1935:1935 -p 1234:1234/udp eyevinntechnology/toolbox-rtmp2srt:0.1.0 <STREAMKEY> <IP>:1234
+```
+
+By deafult in SRT listener mode, to use SRT as a client:
+
+```
+docker run --rm -p 1935:1935 eyevinntechnology/toolbox-rtmp2srt:0.1.0 --caller <STREAMKEY> <IP>:1234
+```
+
 # About Eyevinn Technology
 
 Eyevinn Technology is an independent consultant firm specialized in video and streaming. Independent in a way that we are not commercially tied to any platform or technology vendor.
