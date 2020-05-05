@@ -32,12 +32,12 @@ if args.srtmode:
 
 srtoutput = ""
 if args.programreturn:
-  srtoutput = "-f mpegts srt://0.0.0.0:%s?pkt_size=1316%s" % (returnport, srtmode)
+  srtoutput = "-f fifo -fifo_format mpegts -map 0:v:0 -map 0:a:0 -c copy srt://0.0.0.0:%s?pkt_size=1316%s" % (returnport, srtmode)
 
-ffmpeg = "ffmpeg -fflags +genpts -re -i %s -vcodec copy -acodec copy -strict -2 -y %s " % (args.hlsurl, srtoutput)
+ffmpeg = "ffmpeg -fflags +genpts -re -i %s -strict -2 -y %s " % (args.hlsurl, srtoutput)
 
 for dest in args.output:
-  ffmpeg = ffmpeg + "-f flv %s " % (dest)
+  ffmpeg = ffmpeg + "-f fifo -fifo_format flv -map 0:v:0 -map 0:a:0 -c:v copy -vtag 7 -c:a copy -atag 10 -drop_pkts_on_overflow 1 -attempt_recovery 1 -recovery_wait_time 1 %s " % (dest)
 
 if args.debug:
   print "%s" % ffmpeg

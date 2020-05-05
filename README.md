@@ -276,7 +276,7 @@ Use the `hls2rtmp` tool to pull a live HLS stream and re-stream to multiple RTMP
 Example:
 
 ```
-docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.2 HLSURL <RTMPURL1> <RTMPURL2>
+docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.3 HLSURL <RTMPURL1> <RTMPURL2>
 ```
 
 ## Listen for an RTMP stream and output to SRT
