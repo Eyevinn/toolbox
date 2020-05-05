@@ -5,7 +5,7 @@
 # that can be found in the LICENSE file.
 # Author: Jonas Rydholm Birme (Eyevinn Technology)
 #
-# Receive SRT and restream to multiple RTMP destinations
+# Receive HLS and restream to multiple RTMP destinations
 #
 import argparse
 import subprocess
