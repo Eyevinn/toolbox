@@ -287,7 +287,7 @@ Use the `hls2srt` tool to pull a live HLS stream and make available over SRT.
 Example:
 
 ```
-docker run -d --restart always -p 1234:1234/udp eyevinntechnology/toolbox-hls2srt:0.1.0 HLSURL 0.0.0.0:1234
+docker run -d --restart always -p 1234:1234/udp eyevinntechnology/toolbox-hls2srt:0.1.1 HLSURL 0.0.0.0:1234
 ```
 
 ## Listen for an RTMP stream and output to SRT

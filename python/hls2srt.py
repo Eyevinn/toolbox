@@ -24,9 +24,9 @@ srtmode = "&mode=listener"
 if args.srtmode == "caller":
   srtmode = ""
 
-srtoutput = "-f fifo -fifo_format mpegts -map 0:v:0 -map 0:a:0 -c copy srt://%s?pkt_size=1316%s" % (args.address, srtmode)
+srtoutput = "-f mpegts srt://%s?pkt_size=1316%s" % (args.address, srtmode)
 
-ffmpeg = "ffmpeg -fflags +genpts -re -i %s -strict -2 -y %s " % (args.hlsurl, srtoutput)
+ffmpeg = "ffmpeg -fflags +genpts -re -i %s -strict -2 -y -acodec copy -vcodec copy %s " % (args.hlsurl, srtoutput)
 
 if args.debug:
   print "%s" % ffmpeg
