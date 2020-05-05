@@ -11,6 +11,7 @@ The Eyevinn Toolbox is a set of Docker containers with tools that may come in ha
 | Mosaic TS | Render a 2x2 or 3x3 mosaic in MPEG-TS from 4 or 9 HLS sources | eyevinntechnology/toolbox-mosaicts |
 | HLS 2 TS  | Pull a live HLS stream and output to multicast TS | eyevinntechnology/toolbox-hls2ts |
 | HLS 2 RTMP | Pull a live HLS stream and re-stream to multiple RTMP destinations. | eyevinntechnology/toolbox-hls2rtmp |
+| HLS 2 SRT | Pull a live HLS stream and transmit over SRT | eyevinntechnology/toolbox-hls2srt |
 | SRT 2 RTMP | Receive an SRT stream and re-stream to multiple RTMP destinations. | eyevinntechnology/toolbox-srt2rtmp |
 | RTMP 2 SRT | Receive an RTMP stream and transmit over SRT. | eyevinntechnology/toolbox-rtmp2srt |
 
@@ -277,6 +278,16 @@ Example:
 
 ```
 docker run --rm eyevinntechnology/toolbox-hls2rtmp:0.1.3 HLSURL <RTMPURL1> <RTMPURL2>
+```
+
+## Pull a live HLS stream and output to SRT
+
+Use the `hls2srt` tool to pull a live HLS stream and make available over SRT.
+
+Example:
+
+```
+docker run -d --restart always -p 1234:1234/udp eyevinntechnology/toolbox-hls2srt:0.1.0 HLSURL 0.0.0.0:1234
 ```
 
 ## Listen for an RTMP stream and output to SRT
