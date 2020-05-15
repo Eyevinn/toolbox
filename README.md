@@ -140,7 +140,7 @@ The `srttx` tool can be used to receive a local RTMP stream and restream to an `
 On the transmitter side with for example Wirecast as producing the stream first start the `srttx` tool.
 
 ```
-$ docker run --rm -p 1935:1935 eyevinntechnology/toolbox-srttx input_stream <IP-RX>:9998 --passthrough
+$ docker run --rm -p 1935:1935 eyevinntechnology/toolbox-srttx:0.2.4 input_stream <IP-RX>:9998 --passthrough
 ```
 
 Then point the Wirecast / OBS output to `rtmp://localhost/live/input_stream`
@@ -152,7 +152,7 @@ $ docker run --rm -p 9998:9998/udp -p <MULTICAST-PORT>:<MULTICAST-PORT>/udp eyev
 ```
 
 ```
-$ docker run --rm eyevinntechnology/toolbox-srttx -h
+$ docker run --rm eyevinntechnology/toolbox-srttx:0.2.4 -h
 usage: srttx.py [-h] [--inputtype INPUTTYPE] [--listener] [--passthrough]
                 inputstream outputaddress
 
@@ -174,7 +174,7 @@ optional arguments:
 The `srttx` tool can also take an MPEG-TS as a source. Instead run the following command on the transmitter side. The receiver side as before.
 
 ```
-$ docker run --rm eyevinntechnology/toolbox-srttx <MULTICAST>:<MULTICAST-PORT> <IP-RX>:9998 --passthrough --inputtype=mpegts
+$ docker run --rm eyevinntechnology/toolbox-srttx:0.2.4 <MULTICAST>:<MULTICAST-PORT> <IP-RX>:9998 --passthrough --inputtype=mpegts
 ```
 
 ## Receive RTMP and restream over Multicast
