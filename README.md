@@ -14,6 +14,7 @@ The Eyevinn Toolbox is a set of Docker containers with tools that may come in ha
 | HLS 2 SRT | Pull a live HLS stream and transmit over SRT | eyevinntechnology/toolbox-hls2srt |
 | SRT 2 RTMP | Receive an SRT stream and re-stream to multiple RTMP destinations. | eyevinntechnology/toolbox-srt2rtmp |
 | RTMP 2 SRT | Receive an RTMP stream and transmit over SRT. | eyevinntechnology/toolbox-rtmp2srt |
+| VOD Transcode | Quickly transcode video file to a set of different bitrates | eyevinntechnology/toolbox-transcode |
 
 ## Loop input file and output MPEG-TS multicast
 
@@ -305,6 +306,16 @@ By deafult in SRT listener mode, to use SRT as a client:
 ```
 docker run --rm -p 1935:1935 eyevinntechnology/toolbox-rtmp2srt:0.1.0 --caller <STREAMKEY> <IP>:1234
 ```
+
+## VOD Transcode
+
+Quickly transcode video file to a set of different bitrates.
+
+```
+docker run --rm -v $PWD:/media eyevinntechnology/toolbox-transcode:0.1.0 --framerate 24 videofile-720p.mp4
+```
+
+and it will generate three GOP-aligned MP4 files prepared to be chunked into segments.
 
 # About Eyevinn Technology
 
