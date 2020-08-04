@@ -24,6 +24,9 @@ mode = '&mode=listener'
 if args.caller:
   mode = ''
 
+if args.streamkey:
+  mode += '&passphrase=' + args.streamkey
+
 ffmpeg = "ffmpeg -fflags +genpts -listen 1 -re -i rtmp://0.0.0.0/rtmp/%s -acodec copy -vcodec copy -strict -2 -y -f mpegts srt://%s?pkt_size=1316%s" % (args.streamkey, args.address, mode)
 
 if args.debug:
