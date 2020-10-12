@@ -298,7 +298,7 @@ Use the `rtmp2srt` tool to receive an RTMP stream and transmit over SRT.
 Example:
 
 ```
-docker run --rm -p 1935:1935 -p 1234:1234/udp eyevinntechnology/toolbox-rtmp2srt:0.1.0 <STREAMKEY> <IP>:1234
+docker run --rm -p 1935:1935 -p 1234:1234/udp eyevinntechnology/toolbox-rtmp2srt:0.1.1 <STREAMKEY> <IP>:1234
 ```
 
 By deafult in SRT listener mode, to use SRT as a client:
