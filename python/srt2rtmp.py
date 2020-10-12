@@ -22,7 +22,7 @@ args = parser.parse_args()
 ffmpeg = "ffmpeg -re -i srt://%s?pkt_size=1316&mode=listener -strict -2 -y " % (args.inputaddress)
 
 for dest in args.output:
-  ffmpeg = ffmpeg + "-f fifo -fifo_format flv -map 0:0 -map 0:1 -c copy -vtag 7 -atag 10 -drop_pkts_on_overflow 1 -attempt_recovery 1 -recovery_wait_time 1 %s " % (dest)
+  ffmpeg = ffmpeg + "-f fifo -fifo_format flv -map 0:0 -map 0:1? -c copy -vtag 7 -atag 10 -drop_pkts_on_overflow 1 -attempt_recovery 1 -recovery_wait_time 1 %s " % (dest)
 
 if args.debug:
   print "%s" % ffmpeg
